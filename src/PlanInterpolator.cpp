@@ -64,8 +64,12 @@ void PlanInterpolator::addGUIElements()
       {"Walking", "Footsteps"}, Label("Plan name", [this]() { return customPlan_.name; }),
       ComboInput("Gait", {"Walk", "Shuffle", "Turn"}, [this]() { return gait(); },
                  [this](const std::string & dir) { gait(dir); }),
-      ComboInput("Lead foot", {"Left", "Right"}, [this]() { return (startWithRightFootstep_) ? "Right" : "Left"; },
-                 [this](const std::string & footName) {
+      ComboInput("Lead foot", {"Left", "Right"}, [this]() { 
+                   std::string footName_;
+                   footName_=(startWithRightFootstep_) ? "Right" : "Left";
+                   return footName_;
+                    },
+                 [this](const std::string & footName) {                  
                    startWithRightFootstep_ = (footName == "Right");
                    run();
                  }),

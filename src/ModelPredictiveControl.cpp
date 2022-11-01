@@ -92,14 +92,16 @@ void ModelPredictiveControl::addGUIElements(std::shared_ptr<mc_rtc::gui::StateBu
   gui->addElement({"Walking", "CoM"},
                   ComboInput("MPC QP solver", {"QuadProgDense", "QLD"},
                              [this]() {
+                               std::string solverTemp;                              
                                switch(solver_)
                                {
                                  case copra::SolverFlag::QLD:
-                                   return "QLD";
-                                 case copra::SolverFlag::QuadProgDense:
+                                   solverTemp="QLD";
+                                 case copra::SolverFlag::QuadProgDense:;
                                  default:
-                                   return "QuadProgDense";
+                                   solverTemp="QuadProgDense";
                                }
+                               return solverTemp;
                              },
                              [this](const std::string & solver) {
                                if(solver == "QLD")
